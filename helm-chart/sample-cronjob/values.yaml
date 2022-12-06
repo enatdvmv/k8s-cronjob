@@ -1,0 +1,47 @@
+# Default values for sample-cronjob.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+          
+cronjob:
+  enabled: true
+  name: deegreecronjob
+  schedule: "0,30 * * * *"
+  ingressUrl: http://ingress-ip
+  
+image:
+  repository: "docker-dev/sample-cronjob"
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+  
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 3000
+  fsGroup: 3000
+  
+securityContext:
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 3000
+  
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+   limits:
+     memory: 200Mi
+     cpu: 200m
+   requests:
+     memory: 100Mi
+     cpu: 100m
+     

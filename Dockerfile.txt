@@ -1,0 +1,17 @@
+# This file is available under the following license:
+# under LGPL 2.1 (LICENSE.TXT) Copyright 2022 ...
+
+FROM debian:buster
+
+LABEL maintainer="..."
+
+RUN apt-get -y update && \
+    apt-get install -y wget
+
+RUN groupadd -r -g 3000 tomcat && useradd -g tomcat -d /tmp -s /bin/bash -u 3000 tomcat && \
+    mkdir /tmp/deegree_response && \
+    chown -R tomcat:tomcat /tmp/deegree_response
+	
+USER tomcat
+
+WORKDIR /tmp/deegree_response
